@@ -45,7 +45,11 @@ local function _1_()
       vim.api.nvim_win_close(float, true)
       return assert.is_false(psl_win["visible?"](float))
     end
-    return it("returns true for an open floating window", _10b_)
+    it("returns true for an open floating window", _10b_)
+    local function _10c_()
+      return assert.is_false(psl_win["visible?"](nil))
+    end
+    return it("returns false for nil", _10c_)
   end
   describe("visible?", _8_)
   local function _11_()
