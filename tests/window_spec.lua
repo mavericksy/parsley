@@ -37,7 +37,15 @@ local function _1_()
       vim.api.nvim_win_close(winid, true)
       return assert.is_false(psl_win["visible?"](winid))
     end
-    return it("returns false for an non-visible window in the current tabpage", _10_)
+    it("returns false for an non-visible window in the current tabpage", _10_)
+    local function _10b_()
+      local buf = vim.api.nvim_create_buf(false, true)
+      local float = vim.api.nvim_open_win(buf, false, {relative = "editor", row = 1, col = 1, width = 10, height = 3})
+      assert.is_true(psl_win["visible?"](float))
+      vim.api.nvim_win_close(float, true)
+      return assert.is_false(psl_win["visible?"](float))
+    end
+    return it("returns true for an open floating window", _10b_)
   end
   describe("visible?", _8_)
   local function _11_()

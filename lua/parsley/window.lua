@@ -23,7 +23,7 @@ window["floating?"] = function(winid)
   return (window["get-zindex"](winid) ~= nil)
 end
 window["visible?"] = function(winid)
-  return (vim.fn.win_id2win(winid) > 0)
+  return (vim.api.nvim_win_is_valid(winid) and (vim.api.nvim_win_get_tabpage(winid) == vim.api.nvim_get_current_tabpage()))
 end
 window["get-height"] = function(winid)
   local _4_, _5_ = pcall(vim.api.nvim_win_get_height, winid)
