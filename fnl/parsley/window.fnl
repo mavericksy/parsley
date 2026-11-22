@@ -30,7 +30,8 @@
 (fn window.visible? [winid]
   "Checks if window with `winid` is visible in current tabpage.
 Works for floating windows too, unlike `win_id2win()`, which returns 0 for them."
-  (and (vim.api.nvim_win_is_valid winid)
+  (and (= (type winid) "number")
+       (vim.api.nvim_win_is_valid winid)
        (= (vim.api.nvim_win_get_tabpage winid)
           (vim.api.nvim_get_current_tabpage))))
 
